@@ -1,9 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<br /> <br />
+<form action="/Home/SearchItemByName" method="get">
+    <label class="form-control">Item Name</label>
+    <input type="text" name="Name" class="form-control" />
+    <input type="submit" value="Search" />
+</form>
 
 <br /><br />
-<a href="/Home/NewItem">Add new Item</a>
+<a href="/Home/NewItem">Add New Item</a>
 <br /><br />
 
 @foreach (var Items in ViewBag.Items)
@@ -11,10 +17,13 @@
     <div class="panel panel-primary col-sm-4">
         <div class="panel-heading text-center">@Items.Name</div>
         <div class="panel-body text-center">
+            <h5>@Items.ID</h5>
             <h3>@Items.Name</h3>
             <h5>@Items.Description</h5>
             <h5>@Items.Quantity in stock</h5>
             <h5>$@Items.Price</h5>
+            <a href="/Home/ItemDetails?ID=@Items.ID" onclick="return confirm('Are you sure?')">Edit</a>
+            <a href="/Home/DeleteItem?ID=@Items.ID" onclick="return confirm('Are you sure?')">Delete</a>
         </div>
     </div>
 }
